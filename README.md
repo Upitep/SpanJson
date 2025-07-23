@@ -1,5 +1,10 @@
+# Archived, no further development planned # 
+
+
+
 # SpanJson
 [![NuGet](https://img.shields.io/nuget/v/SpanJson.svg)](https://www.nuget.org/packages/SpanJson)
+
 
 See https://github.com/Tornhoof/SpanJson/wiki/Performance for Benchmarks
 
