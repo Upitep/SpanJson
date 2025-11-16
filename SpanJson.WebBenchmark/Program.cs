@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using SpanJson.WebBenchmark.Infrastructure;
 
 namespace SpanJson.WebBenchmark
 {
@@ -7,13 +9,15 @@ namespace SpanJson.WebBenchmark
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
-        }
+            var builder = WebApplication.CreateBuilder(args);
+            // Add services
+            builder.Services.AddMvcCore().AddSerializers();
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
-        {
-            return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            var app = builder.Build();
+
+            app.MapControllers();
+
+            app.Run();
         }
     }
 }
