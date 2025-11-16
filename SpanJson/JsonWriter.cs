@@ -20,19 +20,19 @@ namespace SpanJson
             _depth = 0;
             if (typeof(TSymbol) == typeof(char))
             {
-                _chars = MemoryMarshal.Cast<TSymbol, char>(Data);
-                _bytes = null;
+                _chars = MemoryMarshal.Cast<TSymbol, char>(Data.AsSpan());
+                _bytes = default;
             }
             else if (typeof(TSymbol) == typeof(byte))
             {
-                _bytes = MemoryMarshal.Cast<TSymbol, byte>(Data);
-                _chars = null;
+                _bytes = MemoryMarshal.Cast<TSymbol, byte>(Data.AsSpan());
+                _chars = default;
             }
             else
             {
                 ThrowNotSupportedException();
-                _chars = null;
-                _bytes = null;
+                _chars = default;
+                _bytes = default;
             }
         }
 
@@ -63,7 +63,7 @@ namespace SpanJson
             {
                 var poolArray =
                     ArrayPool<TSymbol>.Shared.Rent(Math.Max(_pos + requiredAdditionalCapacity, _chars.Length * 2));
-                var converted = MemoryMarshal.Cast<TSymbol, char>(poolArray);
+                var converted = MemoryMarshal.Cast<TSymbol, char>(poolArray.AsSpan());
                 _chars.CopyTo(converted);
                 _chars = converted;
                 Data = poolArray;
@@ -72,7 +72,7 @@ namespace SpanJson
             {
                 var poolArray =
                     ArrayPool<TSymbol>.Shared.Rent(Math.Max(_pos + requiredAdditionalCapacity, _bytes.Length * 2));
-                var converted = MemoryMarshal.Cast<TSymbol, byte>(poolArray);
+                var converted = MemoryMarshal.Cast<TSymbol, byte>(poolArray.AsSpan());
                 _bytes.CopyTo(converted);
                 _bytes = converted;
                 Data = poolArray;
