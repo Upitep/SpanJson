@@ -14,15 +14,14 @@ namespace SpanJson
         public static void DeserializeInto<T>(ReadOnlySpan<byte> utf8Json, ref T value)
         {
             var reader = new JsonReader<byte>(utf8Json);
-            // Get formatter from default resolver
-            var formatter = JsonSerializer.Generic.Utf8.Resolver.GetFormatterWithVerify<T>();
-            if (formatter is IReusableJsonFormatter<T, byte> reusable)
+            var formatter = JsonSerializer.Generic.Utf8.Deserialize<T>(utf8Json);
+            if (value is IReusableJsonFormatter<T, byte> reusable)
             {
                 reusable.Deserialize(ref reader, ref value);
             }
             else
             {
-                value = JsonSerializer.Generic.Utf8.Deserialize<T>(utf8Json);
+                value = formatter;
             }
         }
     }
