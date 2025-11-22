@@ -8,6 +8,10 @@
     <AssemblyOriginatorKeyFile>../SpanJson.snk</AssemblyOriginatorKeyFile>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/Upitep/SpanJson</PackageProjectUrl>
+    <RepositoryUrl>git://github.com/Upitep/SpanJson</RepositoryUrl>
+    <Version>5.0.1</Version>
+    <PackageReleaseNotes>Added JsonSerializerReuse</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
